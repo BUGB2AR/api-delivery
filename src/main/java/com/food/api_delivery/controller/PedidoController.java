@@ -35,9 +35,7 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public PedidoResponseDTO buscarPorId(
-            @PathVariable UUID id
-    ) {
+    public PedidoResponseDTO buscarPorId(@PathVariable UUID id) {
         return pedidoService.buscarPorId(id);
     }
 }

@@ -27,4 +27,22 @@ public class GlobalExceptionHandler {
                 request.getRequestURI()
         );
     }
+
+    @ExceptionHandler(EmailJaCadastradoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrorResponseDTO handleEmailJaCadastrado(EmailJaCadastradoException exception, HttpServletRequest request) {
+        return new ApiErrorResponseDTO(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(),
+                "E-mail já cadastrado", exception.getMessage(),
+                request.getRequestURI()
+        );
+    }
+
+    @ExceptionHandler(CredenciaisInvalidasException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiErrorResponseDTO handleCredenciaisInvalidas(CredenciaisInvalidasException exception, HttpServletRequest request) {
+        return new ApiErrorResponseDTO(LocalDateTime.now(), HttpStatus.UNAUTHORIZED.value(),
+                "Credenciais inválidas", exception.getMessage(),
+                request.getRequestURI()
+        );
+    }
 }

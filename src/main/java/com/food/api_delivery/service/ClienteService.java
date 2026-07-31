@@ -7,9 +7,9 @@ import com.food.api_delivery.mapper.request.ClienteRequestMapper;
 import com.food.api_delivery.mapper.response.ClienteResponseMapper;
 import com.food.api_delivery.model.Cliente;
 import com.food.api_delivery.repository.ClienteRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,12 +27,12 @@ public class ClienteService {
         return ClienteResponseMapper.toResponse(cliente);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ClienteResponseDTO> listar() {
         return repository.findAll().stream().map(ClienteResponseMapper::toResponse).toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ClienteResponseDTO buscarPorId(UUID id) {
         Cliente cliente = repository.findById(id).orElseThrow(() -> new ClienteNaoEncontradoException("Cliente não encontrado."));
         return ClienteResponseMapper.toResponse(cliente);
