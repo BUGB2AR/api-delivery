@@ -2,9 +2,10 @@ package com.food.api_delivery.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.UUID;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "clientes")
@@ -28,4 +29,5 @@ public class Cliente {
     @Builder.Default
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Pedido> pedidos = new ArrayList<>();
+
 }
