@@ -20,9 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class EnderecoServiceTest {
@@ -44,7 +42,8 @@ class EnderecoServiceTest {
                         "Casa",
                         "Centro",
                         "Fortaleza",
-                        "60000-000"
+                        "60000-000",
+                        true
                 );
 
         when(repository.save(any(Endereco.class)))
@@ -77,6 +76,7 @@ class EnderecoServiceTest {
                 .bairro("Centro")
                 .cidade("Fortaleza")
                 .cep("60000-000")
+                .ativo(true)
                 .build();
 
         when(repository.findById(id)).thenReturn(Optional.of(endereco));
@@ -109,6 +109,7 @@ class EnderecoServiceTest {
                 .bairro("Centro")
                 .cidade("Fortaleza")
                 .cep("60000-000")
+                .ativo(true)
                 .build();
 
         when(repository.findAll()).thenReturn(List.of(endereco));
@@ -132,6 +133,7 @@ class EnderecoServiceTest {
                 .bairro("Centro")
                 .cidade("Fortaleza")
                 .cep("60000-000")
+                .ativo(true)
                 .build();
 
         EnderecoRequestDTO dto =
@@ -141,7 +143,8 @@ class EnderecoServiceTest {
                         "Apartamento",
                         "Cocó",
                         "Fortaleza",
-                        "60192-000"
+                        "60192-000",
+                        true
                 );
 
         when(repository.findById(id)).thenReturn(Optional.of(endereco));
@@ -172,7 +175,8 @@ class EnderecoServiceTest {
                         "Apartamento",
                         "Cocó",
                         "Fortaleza",
-                        "60192-000"
+                        "60192-000",
+                        true
                 );
 
         assertThrows(EnderecoNaoEncontradoException.class, () -> service.atualizar(id, dto));
@@ -180,7 +184,7 @@ class EnderecoServiceTest {
 
     @Test
     @DisplayName("Deve excluir endereço")
-    void deveExcluirEndereco() {
+    void deveInativarEndereco() {
 
         UUID id = UUID.randomUUID();
 
@@ -192,24 +196,25 @@ class EnderecoServiceTest {
                 .bairro("Centro")
                 .cidade("Fortaleza")
                 .cep("60000-000")
+                .ativo(true)
                 .build();
 
         when(repository.findById(id)).thenReturn(Optional.of(endereco));
 
-        service.excluir(id);
+        service.inativar(id);
 
-        verify(repository, times(1)).delete(endereco);
+        verify(repository, never()).delete(any());
     }
 
     @Test
     @DisplayName("Deve lançar exceção ao excluir endereço inexistente")
-    void deveLancarExcecaoAoExcluirEnderecoInexistente() {
+    void deveLancarExcecaoAoInativarEnderecoInexistente() {
 
         UUID id = UUID.randomUUID();
 
         when(repository.findById(id))
                 .thenReturn(Optional.empty());
 
-        assertThrows(EnderecoNaoEncontradoException.class, () -> service.excluir(id));
+        assertThrows(EnderecoNaoEncontradoException.class, () -> service.inativar(id));
     }
 }

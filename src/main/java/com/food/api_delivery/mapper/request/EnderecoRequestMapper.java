@@ -17,6 +17,7 @@ public final class EnderecoRequestMapper {
         endereco.setBairro(dto.bairro());
         endereco.setCidade(dto.cidade());
         endereco.setCep(dto.cep());
+        endereco.setAtivo(true);
 
         return endereco;
     }

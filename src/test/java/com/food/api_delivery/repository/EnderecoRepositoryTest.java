@@ -36,6 +36,7 @@ class EnderecoRepositoryTest {
                 .bairro("Centro")
                 .cidade("Fortaleza")
                 .cep("60000-000")
+                .ativo(true)
                 .build();
 
         Endereco enderecoSalvo = repository.save(endereco);
@@ -64,6 +65,7 @@ class EnderecoRepositoryTest {
                 .bairro("Aldeota")
                 .cidade("Fortaleza")
                 .cep("60150-000")
+                .ativo(true)
                 .build();
 
         Endereco enderecoSalvo = repository.save(endereco);
@@ -94,6 +96,7 @@ class EnderecoRepositoryTest {
                 .bairro("Meireles")
                 .cidade("Fortaleza")
                 .cep("60160-000")
+                .ativo(true)
                 .build();
 
         repository.save(endereco);
@@ -112,6 +115,7 @@ class EnderecoRepositoryTest {
                 .bairro("Centro")
                 .cidade("Fortaleza")
                 .cep("60000-000")
+                .ativo(true)
                 .build();
 
         Endereco enderecoSalvo = repository.save(endereco);
@@ -122,6 +126,7 @@ class EnderecoRepositoryTest {
         enderecoSalvo.setBairro("Cocó");
         enderecoSalvo.setCidade("Fortaleza");
         enderecoSalvo.setCep("60192-000");
+        enderecoSalvo.setAtivo(true);
 
         Endereco enderecoAtualizado = repository.save(enderecoSalvo);
 
@@ -146,6 +151,7 @@ class EnderecoRepositoryTest {
                 .bairro("Centro")
                 .cidade("Fortaleza")
                 .cep("60000-000")
+                .ativo(true)
                 .build();
 
         Endereco enderecoSalvo = repository.save(endereco);

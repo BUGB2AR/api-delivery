@@ -15,7 +15,8 @@ public final class EnderecoResponseMapper {
                 endereco.getNumero(),
                 endereco.getComplemento(),
                 endereco.getBairro(), endereco.getCidade(),
-                endereco.getCep()
+                endereco.getCep(),
+                endereco.getAtivo()
         );
     }
 }

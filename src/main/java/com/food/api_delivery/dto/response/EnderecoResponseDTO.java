@@ -8,5 +8,6 @@ public record EnderecoResponseDTO(UUID id,
                                   String complemento,
                                   String bairro,
                                   String cidade,
-                                  String cep) {
+                                  String cep,
+                                  Boolean ativo) {
 }

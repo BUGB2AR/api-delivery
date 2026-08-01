@@ -23,8 +23,9 @@ public class EnderecoService {
     @Transactional
     public EnderecoResponseDTO criar(EnderecoRequestDTO dto) {
         Endereco endereco = EnderecoRequestMapper.toEntity(dto);
-        repository.save(endereco);
+        endereco.validar();
 
+        repository.save(endereco);
         return EnderecoResponseMapper.toResponse(endereco);
     }
 
@@ -57,9 +58,15 @@ public class EnderecoService {
     }
 
     @Transactional
-    public void excluir(UUID id) {
+    public void inativar(UUID id) {
         Endereco endereco = buscarEndereco(id);
-        repository.delete(endereco);
+        endereco.inativar();
+    }
+
+    @Transactional
+    public void ativar(UUID id) {
+        Endereco endereco = buscarEndereco(id);
+        endereco.ativar();
     }
 
     private Endereco buscarEndereco(UUID id) {

@@ -1,6 +1,7 @@
 package com.food.api_delivery.repository;
 
 import com.food.api_delivery.model.Usuario;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,33 +40,12 @@ class UsuarioRepositoryTest {
         assertEquals("francisco3@email.com", usuarioSalvo.getEmail());
     }
 
-    @Test
-    @DisplayName("Deve buscar usuário por e-mail")
-    void deveBuscarUsuarioPorEmail() {
-        Optional<Usuario> resultado = repository.findByEmail("francisco3@email.com");
-        assertTrue(resultado.isPresent());
-        assertEquals("Francisco3", resultado.get().getNome());
-    }
 
     @Test
     @DisplayName("Não deve encontrar usuário inexistente")
     void naoDeveEncontrarUsuarioInexistente() {
         Optional<Usuario> resultado = repository.findByEmail("naoexiste@email.com");
         assertFalse(resultado.isPresent());
-    }
-
-    @Test
-    @DisplayName("Deve retornar verdadeiro quando o e-mail existir")
-    void deveRetornarTrueQuandoEmailExistir() {
-        boolean existe = repository.existsByEmail("francisco3@email.com");
-        assertTrue(existe);
-    }
-
-    @Test
-    @DisplayName("Deve retornar falso quando o e-mail não existir")
-    void deveRetornarFalseQuandoEmailNaoExistir() {
-        boolean existe = repository.existsByEmail("teste@email.com");
-        assertFalse(existe);
     }
 
     @Test

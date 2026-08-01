@@ -41,7 +41,7 @@ class PedidoRepositoryTest {
 
         Cliente cliente = clienteRepository.save(
                 Cliente.builder()
-                        .nome("Francisco3")
+                        .nome("Francisco")
                         .telefone("85999999999")
                         .build()
         );
@@ -53,6 +53,7 @@ class PedidoRepositoryTest {
                         .bairro("Centro")
                         .cidade("Fortaleza")
                         .cep("60000-000")
+                        .ativo(true)
                         .build()
         );
 
@@ -84,7 +85,7 @@ class PedidoRepositoryTest {
 
         Cliente cliente = clienteRepository.save(
                 Cliente.builder()
-                        .nome("Francisco3")
+                        .nome("Francisco")
                         .telefone("85999999999")
                         .build()
         );
@@ -96,6 +97,7 @@ class PedidoRepositoryTest {
                         .bairro("Centro")
                         .cidade("Fortaleza")
                         .cep("60000-000")
+                        .ativo(true)
                         .build()
         );
 
@@ -138,6 +140,7 @@ class PedidoRepositoryTest {
                         .bairro("Centro")
                         .cidade("Fortaleza")
                         .cep("60000-000")
+                        .ativo(true)
                         .build()
         );
 
@@ -170,6 +173,7 @@ class PedidoRepositoryTest {
                         .bairro("Centro")
                         .cidade("Fortaleza")
                         .cep("60000-000")
+                        .ativo(true)
                         .build()
         );
 

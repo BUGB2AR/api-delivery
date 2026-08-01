@@ -5,6 +5,7 @@ import com.food.api_delivery.dto.response.EnderecoResponseDTO;
 import com.food.api_delivery.service.EnderecoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +41,14 @@ public class EnderecoController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluir(@PathVariable UUID id) {
-        service.excluir(id);
+    public ResponseEntity<Void> inativar(@PathVariable UUID id) {
+        service.inativar(id);
+        return ResponseEntity.noContent().build();
+    }
+    @PatchMapping("/{id}/ativar")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Void> ativar(@PathVariable UUID id) {
+        service.ativar(id);
+        return ResponseEntity.noContent().build();
     }
 }

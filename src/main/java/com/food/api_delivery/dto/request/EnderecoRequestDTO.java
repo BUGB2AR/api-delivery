@@ -5,5 +5,6 @@ public record EnderecoRequestDTO(String logradouro,
                                  String complemento,
                                  String bairro,
                                  String cidade,
-                                 String cep) {
+                                 String cep,
+                                 boolean ativo) {
 }
