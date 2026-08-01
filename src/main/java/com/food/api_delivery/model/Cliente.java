@@ -1,5 +1,6 @@
 package com.food.api_delivery.model;
 
+import com.food.api_delivery.exception.BusinessException;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,4 +31,13 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Pedido> pedidos = new ArrayList<>();
 
+    public boolean possuiPedidos() {
+        return this.pedidos != null && !this.pedidos.isEmpty();
+    }
+
+    public void validarExclusao() {
+        if (possuiPedidos()) {
+            throw new BusinessException("Não é possível excluir o cliente, pois existem pedidos vinculados a ele.");
+        }
+    }
 }

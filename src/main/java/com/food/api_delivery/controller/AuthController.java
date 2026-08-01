@@ -17,16 +17,12 @@ public class AuthController {
 
     @PostMapping("/cadastro")
     @ResponseStatus(HttpStatus.CREATED)
-    public AuthResponseDTO cadastrar(
-            @RequestBody CadastroUsuarioRequestDTO dto
-    ) {
+    public AuthResponseDTO cadastrar(@RequestBody CadastroUsuarioRequestDTO dto) {
         return authService.cadastrar(dto);
     }
 
     @PostMapping("/login")
-    public AuthResponseDTO login(
-            @RequestBody LoginRequestDTO dto
-    ) {
+    public AuthResponseDTO login(@RequestBody LoginRequestDTO dto) {
         return authService.login(dto);
     }
 }

@@ -51,6 +51,7 @@ public class ClienteService {
     @Transactional
     public void excluir(UUID id) {
         Cliente cliente = repository.findById(id).orElseThrow(() -> new ClienteNaoEncontradoException("Cliente não encontrado."));
+        cliente.validarExclusao();
         repository.delete(cliente);
     }
 }
