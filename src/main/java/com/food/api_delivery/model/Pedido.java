@@ -107,52 +107,11 @@ public class Pedido {
         if (novoStatus == null) {
             throw new BusinessException("Status do pedido é obrigatório.");
         }
-
-        validarTransicaoStatus(novoStatus);
-
+        this.status.validarTransicaoPara(novoStatus);
         this.status = novoStatus;
         atualizarData();
     }
 
-    private void validarTransicaoStatus(StatusPedido novoStatus) {
-        if (this.status == StatusPedido.CANCELADO) {
-            throw new BusinessException("Pedido cancelado não pode ter o status alterado.");
-        }
-
-        if (this.status == StatusPedido.ENTREGUE) {
-            throw new BusinessException("Pedido entregue não pode ter o status alterado.");
-        }
-
-        switch (this.status) {
-            case RECEBIDO -> {
-                if (novoStatus != StatusPedido.EM_PREPARO &&
-                        novoStatus != StatusPedido.CANCELADO) {
-                    throw new BusinessException(
-                            "Pedido recebido só pode ir para em preparo ou cancelado."
-                    );
-                }
-            }
-
-            case EM_PREPARO -> {
-                if (novoStatus != StatusPedido.SAIU_PARA_ENTREGA &&
-                        novoStatus != StatusPedido.CANCELADO) {
-                    throw new BusinessException(
-                            "Pedido em preparo só pode ir para saiu para entrega ou cancelado."
-                    );
-                }
-            }
-
-            case SAIU_PARA_ENTREGA -> {
-                if (novoStatus != StatusPedido.ENTREGUE) {
-                    throw new BusinessException(
-                            "Pedido saiu para entrega só pode ir para entregue."
-                    );
-                }
-            }
-
-            default -> throw new BusinessException("Transição de status inválida.");
-        }
-    }
 
     private void recalcularValorTotal() {
         this.valorTotal = this.itens.stream()
